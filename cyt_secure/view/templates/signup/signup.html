@@ -170,7 +170,7 @@
 
             <div class="form-right">
                 <label for="{lbl_username}">{lbl_username}</label>
-                <input required type="text" value="" id="input_username" name="username" data-required="yes" data-required-msg="{txt_ingrese_username}" class="input-text input-max-length" onFocus="javascript: cuilFormato();" onblur='validarDirector(this)'/>
+                <input required type="text" value="" id="input_username" class="inputSignup" name="username" data-required="yes" data-required-msg="{txt_ingrese_username}" class="input-text input-max-length" onFocus="javascript: cuilFormato();" onblur='validarDirector(this)'/>
                 <div class="obligatorio">
                     <h3>*</h3>
                 </div>
@@ -178,7 +178,7 @@
             <div class="form-left">
                 <label for="{lbl_password}">{lbl_password}</label>
 
-                <input required onkeyup="showPswSecurityLevel(this.value);" type='password' name='ds_password' id='ds_password' size='20' jVal="{valid:function (val) { return required(val,'{ingrese_password}'); }}"/>
+                <input required onkeyup="showPswSecurityLevel(this.value);" type='password' class="inputSignup" name='ds_password' id='ds_password' size='20' jVal="{valid:function (val) { return required(val,'{ingrese_password}'); }}"/>
                 <span id="pswSecutiryLevel">
 						&nbsp  <span id="scorebarBorder">
 	                        <span id="score"></span>
@@ -196,7 +196,7 @@
             <div class="form-right">
                 <label for="{lbl_name}">{lbl_name}</label>
 
-                <input required type='text'  name='ds_name' id='ds_name' value='{ds_name}'/>
+                <input required type='text'  class="inputSignup" name='ds_name' id='ds_name' value='{ds_name}'/>
                 <div class="obligatorio">
                     <h3>*</h3>
                 </div>
@@ -204,7 +204,7 @@
             <div class="form-left">
                 <label for="{lbl_repeat_password}">{lbl_repeat_password}</label>
 
-                <input type='password' name='pass2' id='pass2'/>
+                <input type='password' class="inputSignup" name='pass2' id='pass2'/>
                 <div class="obligatorio">
                     <h3>*</h3>
                 </div>
@@ -215,7 +215,7 @@
         <div class="form-flex">
             <div class="form-right">
                 <label for="{lbl_email}">{lbl_email}</label>
-                <input required type="email" name='ds_email' id='ds_email'  value='{ds_email}' />
+                <input required type="email" class="inputSignup" name='ds_email' id='ds_email'  value='{ds_email}' />
 
                 <div class="obligatorio">
                     <h3>*</h3>
@@ -224,7 +224,7 @@
             <div class="form-left">
                 <label for="{lbl_facultad}">{lbl_facultad}</label>
 
-                <select class="selectFacultad" name='facultad_oid' id='facultad_oid' >
+                <select class="inputSignup"  name='facultad_oid' id='facultad_oid' >
                     <option value=""> -- Seleccione una -- </option>
                     <!-- BEGIN: facultad -->
                     <option value={cd_facultad}>{ds_facultad}</option>
