@@ -71,22 +71,27 @@ class CMPSolicitudEstadoFilter extends CMPFilter{
 		
 		
 		$findSolicitud = CYTSecureComponentsFactory::getFindSolicitud(new Solicitud(), CYT_LBL_SOLICITUD, "", "solicitudEstado_filter_solicitud_oid", "solicitud.oid", "");
-		$findSolicitud->setMinWidth("372px;");
+        $findSolicitud->getInput()->addProperty("class", "inputSignup");
 		$this->addField( $findSolicitud );
 		
 		$fieldEstado = FieldBuilder::buildFieldSelect (CYT_LBL_SOLICITUD_ESTADO, "estado.oid", CYTSecureUtils::getEstadosItems(), null, null, null, "--Seleccionar--" );
+        $fieldEstado->getInput()->addProperty("class", "inputSignup");
 		$this->addField( $fieldEstado );
 		
 		$fieldInicioDesde = FieldBuilder::buildFieldDate ( CYT_LBL_SOLICITUD_ESTADO_FECHA_DESDE_DESDE, "inicioDesde"  );
+        $fieldInicioDesde->getInput()->addProperty("class", "inputSignup");
 		$this->addField( $fieldInicioDesde,2 );
 		
 		$fieldInicioHasta = FieldBuilder::buildFieldDate ( CYT_LBL_SOLICITUD_ESTADO_FECHA_DESDE_HASTA, "inicioHasta"  );
+        $fieldInicioHasta->getInput()->addProperty("class", "inputSignup");
 		$this->addField( $fieldInicioHasta,2 );
 		
 		$fieldFinDesde = FieldBuilder::buildFieldDate ( CYT_LBL_SOLICITUD_ESTADO_FECHA_HASTA_DESDE, "finDesde"  );
+        $fieldFinDesde->getInput()->addProperty("class", "inputSignup");
 		$this->addField( $fieldFinDesde,2 );
 		
 		$fieldFinHasta = FieldBuilder::buildFieldDate ( CYT_LBL_SOLICITUD_ESTADO_FECHA_HASTA_HASTA, "finHasta"  );
+        $fieldFinHasta->getInput()->addProperty("class", "inputSignup");
 		$this->addField( $fieldFinHasta,2 );
 		
 		

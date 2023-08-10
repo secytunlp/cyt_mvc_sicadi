@@ -20,14 +20,15 @@ class CMPCambiarEstadoSolicitudForm extends CMPForm{
 		
 			
 		$findSolicitud = CYTSecureComponentsFactory::getFindSolicitud(new Solicitud(), CYT_LBL_SOLICITUD, CYT_MSG_SOLICITUD_ESTADO_SOLICITUD_REQUIRED, "solicitud_form_estado_oid", "solicitud.oid", "estado_filter_solicitud_change");
-		//$findSolicitud->getInput()->setInputSize(5,80);
+		$findSolicitud->getInput()->addProperty("class", "inputSignup");
 		$fieldset->addField( $findSolicitud );
 		
 		$fieldEstado = FieldBuilder::buildFieldSelect (CYT_LBL_ESTADO, "estado.oid", CYTSecureUtils::getEstadosItems(), CYT_MSG_SOLICITUD_ESTADO_ESTADO_REQUIRED, null, null, "--seleccionar--" );
+		$fieldEstado->getInput()->addProperty("class", "inputSignup");
 		$fieldset->addField( $fieldEstado );
 		
 		$fieldset->addField( FieldBuilder::buildFieldTextArea ( CYT_LBL_SOLICITUD_ESTADO_MOTIVO, "motivo"  ) );
-		
+
 		
 		$this->addFieldset($fieldset);
 		$this->addHidden( FieldBuilder::buildInputHidden ( "oid", "") );

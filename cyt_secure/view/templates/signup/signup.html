@@ -1,6 +1,24 @@
 <!-- BEGIN: main -->
 <script language="javascript" src="{WEB_PATH}js/pwd_meter.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#signup').submit(function(event) {
+
+            var password = $('#ds_password').val();
+            var confirmPassword = $('#pass2').val();
+
+
+            if (password !== confirmPassword) {
+
+                event.preventDefault();
+                $('#pass2').get(0).setCustomValidity('Las passwords no coinciden');
+            } else {
+                $('#pass2').get(0).setCustomValidity('');
+            }
+        });
+
+
+    });
     cuilMask = function ( cuilid){
 
         $(cuilid).inputmask('remove');

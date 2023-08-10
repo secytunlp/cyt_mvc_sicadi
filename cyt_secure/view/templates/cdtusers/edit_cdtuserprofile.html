@@ -2,7 +2,22 @@
 <script language="javascript" src="{WEB_PATH}js/pwd_meter.js"></script>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		$('#editCdtUser').submit(function(event) {
+			var password = $('#ds_new_password').val();
+			var confirmPassword = $('#ds_repeat_new_password').val();
 
+			console.log(password+' '+confirmPassword);
+			if (password !== confirmPassword) {
+				event.preventDefault();
+				$('#ds_repeat_new_password').get(0).setCustomValidity('Las passwords no coinciden');
+			} else {
+				$('#ds_repeat_new_password').get(0).setCustomValidity('');
+			}
+		});
+
+
+	});
 function showPswSecurityLevel( psw ){
 
 	var oScorebar = document.getElementById("scorebar");
@@ -138,6 +153,7 @@ function showPswSecurityLevel( psw ){
 				<label for="{ds_repeat_new_password_label}">{ds_repeat_new_password_label}</label>
 				<input type='password' class="inputSignup" name='ds_repeat_new_password' id='ds_repeat_new_password' />
 			</div>
+
 		</div>
 
 
