@@ -16,14 +16,20 @@ class CMPTituloForm extends CMPForm{
 		parent::__construct($id);
 
 		$fieldset = new FormFieldset( "" );
+
+
+
 		$fieldset->addField( FieldBuilder::buildFieldReadOnly ( CDT_ENTITIES_LBL_ENTITY_OID, "oid", ""  ) );
 
-		$fieldset->addField( FieldBuilder::buildFieldText ( CYT_LBL_TITULO_NOMBRE, "ds_titulo", CYT_MSG_TITULO_NOMBRE_REQUIRED  ) );
+		$field = FieldBuilder::buildFieldText ( CYT_LBL_TITULO_NOMBRE, "ds_titulo", CYT_MSG_TITULO_NOMBRE_REQUIRED  );
+		$field->getInput()->addProperty("class", "inputSignup");
+		$fieldset->addField( $field );
 	
 		$findPais = CYTSecureComponentsFactory::getFindUniversidadWithAdd(new Universidad(), CYT_LBL_TITULO_UNIVERSIDAD, CYT_MSG_TITULO_UNIVERSIDAD_REQUIRED, "titulo_universidad_oid", "universidad.oid", "titulo_universidad_change");
 		$fieldset->addField( $findPais );
 		
 		$field = FieldBuilder::buildFieldSelect (CYT_LBL_TITULO_NIVEL, "nu_nivel", Nivel::getItems(), CYT_MSG_TITULO_NIVEL_REQUIRED, null, null, "--seleccionar--" );
+		$field->getInput()->addProperty("class", "inputSignup");
 		$fieldset->addField( $field );
 		
 		

@@ -28,6 +28,7 @@ class CMPTituloFilter extends CMPFilter{
 		
 		//formamos el form de búsqueda.
 		$field = FieldBuilder::buildFieldText ( CYT_LBL_TITULO_NOMBRE, "ds_titulo"  );
+
 		$this->addField( $field );
 		
 		$find = CYTSecureComponentsFactory::getFindUniversidad(new Universidad(), CYT_LBL_UNIVERSIDAD, "", "titulo_filter_universidad_oid", "universidad.oid", "titulo_filter_universidad_change");
