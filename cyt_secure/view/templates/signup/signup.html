@@ -1,0 +1,260 @@
+<!-- BEGIN: main -->
+<script language="javascript" src="{WEB_PATH}js/pwd_meter.js"></script>
+<script type="text/javascript">
+    cuilMask = function ( cuilid){
+
+        $(cuilid).inputmask('remove');
+        $(cuilid).inputmask({
+            mask: ["99-99999999-9"], placeholder: ""
+        });
+
+
+
+    }
+
+
+    function  cuilFormato( ){
+
+        cuilMask('#input_username');
+
+    }
+    function validar(){       
+        form = document.getElementById('signup');
+        result = validate('signup') && (form.accept.checked);
+        /*if(!result){
+            if(form.accept.checked == false){
+                jAlert("{debe_leer_terminos}", "{titulo}");
+            }
+        }*/
+        return result;
+    }
+    function validarDirector(dni){
+        let numArray = dni.value.split("-");
+    	if(numArray[1]!=""){
+    	 $("#span_loading").append("<span id='iconoLoading' style='position:absolute;'><img src='css/grid/loading.gif' /></span>")
+    	jQuery.ajax({
+    	      url:"doAction?action=add_registro_chequear&documento=" + numArray[1],
+    	      dataType:"json",
+    	      success: function(data){
+    	      	
+    	      	if( data != null && data["error"]!=null){
+    	      		showMessageError( data["error"], true );
+    	      		//inhabilitar el submit.
+    	      		$("#b_submit").hide();
+    	      	}
+    	      	
+    	      	if( data != null && data["valido"] ){
+    	      		showMessageInfo( data["mensajes"], true );
+    	      		//habilitar el submit.
+    	      		$("#b_submit").show();
+    	      	}else{
+    	      		
+    	      		showMessageError( data["mensajes"], true );
+    	      		//inhabilitar el submit.
+    	      		$("#b_submit").hide();
+    	      	} 	
+    	      	
+    	      	
+    	      	$("#iconoLoading").remove();
+    	      }
+    	});
+    }
+    }
+    function viewTerms(){
+
+    	url = '{WEB_PATH}terms_conditions.html';
+    	var dialogOpts = {
+                title : "{txt_terms_title}",
+                modal : true,
+                autoOpen : false,
+                bgiframe : true,
+                buttons : {
+                    "{txt_terms_accept}" : function() {
+                    	$("input[name=accept]").attr('checked', true);
+                    	jQuery('#ui-dialog-terms').dialog("destroy");
+                    }
+                },
+                height : 600,
+                width : 600,
+                open : function() {
+                    jQuery("#ui-dialog-terms").load(url);
+                }
+            };
+            jQuery("#ui-dialog-terms").children().remove();
+            jQuery("#ui-dialog-terms").dialog("destroy");
+            jQuery("#ui-dialog-terms").dialog(dialogOpts);
+            jQuery("#ui-dialog-terms").dialog("open");
+            
+    	
+    }
+    
+    function showPswSecurityLevel( psw ){
+
+    	var oScorebar = document.getElementById("scorebar");
+    	var oScore = document.getElementById("score");
+
+    	oScorebar.style.backgroundPosition = "0";
+    	$("#score").html("");
+    	$("#psw_level").html("");
+    	
+    	var nScore = getPassScore(psw);
+
+    	if( nScore >= 0 ){
+
+    		if (nScore > 100) { nScore = 100; } else if (nScore < 0) { nScore = 0; }
+    		if (nScore >= 0 && nScore < 20) { sComplexity = "Muy d&eacute;bil"; }
+    		else if (nScore >= 20 && nScore < 40) { sComplexity = "D&eacute;bil"; }
+    		else if (nScore >= 40 && nScore < 60) { sComplexity = "Buena"; }
+    		else if (nScore >= 60 && nScore < 80) { sComplexity = "Segura"; }
+    		else if (nScore >= 80 && nScore <= 100) { sComplexity = "Muy segura"; }
+
+    		$("#psw_level").html(sComplexity);
+    		oScorebar.style.backgroundPosition = "-" + parseInt(nScore * 4) + "px";
+    		oScore.innerHTML = nScore + "%";
+    	}
+    	
+    	
+    	
+    }
+</script>
+
+
+<style>
+
+#scorebarBorder {
+    background: none repeat scroll 0 0 #333333;
+    /*border: 1px solid #000000;*/
+    height: 16px;
+    margin-bottom: 2px;
+    width: 100px;
+}
+#score {
+    color: #000000;
+    font-size: 85%;
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    z-index: 10;
+}
+
+#scorebar {
+    background-image: url("{WEB_PATH}css/images/bg_strength_gradient.jpg");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100px;
+    z-index: 0;
+}
+
+#pswSecutiryLevel{
+	/*float:left;*/
+
+}
+
+</style>
+<!-- BEGIN: msg -->
+<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+        {msg}
+    </p>
+</div>
+<br />
+<!-- END: msg -->
+<div class="container">
+
+
+        <form name='signup' id='signup' action='doAction?action=signup' onsubmit="return validar();" method='post'>
+        <!-- este formulario se hace con flexbox porque tiene dos columnas -->
+
+        <div class="form-flex">
+
+            <div class="form-right">
+                <label for="{lbl_username}">{lbl_username}</label>
+                <input required type="text" value="" id="input_username" name="username" data-required="yes" data-required-msg="{txt_ingrese_username}" class="input-text input-max-length" onFocus="javascript: cuilFormato();" onblur='validarDirector(this)'/>
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+            </div>
+            <div class="form-left">
+                <label for="{lbl_password}">{lbl_password}</label>
+
+                <input required onkeyup="showPswSecurityLevel(this.value);" type='password' name='ds_password' id='ds_password' size='20' jVal="{valid:function (val) { return required(val,'{ingrese_password}'); }}"/>
+                <span id="pswSecutiryLevel">
+						&nbsp  <span id="scorebarBorder">
+	                        <span id="score"></span>
+	                        <span id="scorebar" style="background-position: -400px center;">&nbsp;</span>
+	                    </span>
+	                    <div id="psw_level"></div>
+                    </span>
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-flex">
+            <div class="form-right">
+                <label for="{lbl_name}">{lbl_name}</label>
+
+                <input required type='text'  name='ds_name' id='ds_name' value='{ds_name}'/>
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+            </div>
+            <div class="form-left">
+                <label for="{lbl_repeat_password}">{lbl_repeat_password}</label>
+
+                <input type='password' name='pass2' id='pass2'/>
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-flex">
+            <div class="form-right">
+                <label for="{lbl_email}">{lbl_email}</label>
+                <input required type="email" name='ds_email' id='ds_email'  value='{ds_email}' />
+
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+            </div>
+            <div class="form-left">
+                <label for="{lbl_facultad}">{lbl_facultad}</label>
+
+                <select class="selectFacultad" name='facultad_oid' id='facultad_oid' >
+                    <option value=""> -- Seleccione una -- </option>
+                    <!-- BEGIN: facultad -->
+                    <option value={cd_facultad}>{ds_facultad}</option>
+                    <!-- END: facultad -->
+                </select>
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+            </div>
+        </div>
+        <div class="campos-requeridos">
+            <h4> (*) CAMPOS REQUERIDOS </h4>
+        </div>
+        <div class="botones">
+            <img id="siimage" align="center" style="padding-right: 5px; border: 0" src="{WEB_PATH}/libs/captcha/securimage_show.php?sid={sid_captcha}" />
+            <a tabindex="-1" style="border-style: none" href="#" title="{change_image}" onClick="document.getElementById('siimage').src = '{WEB_PATH}/libs/captcha/securimage_show.php?sid=' + Math.random(); return false"><img src="{WEB_PATH}libs/captcha/refresh.gif" title="{change_image}" alt="{change_image}" border="0" onClick="this.blur()" align="bottom" /></a>
+            <input required type='input' name='captcha' id='captcha'/>
+
+            <button style="" class="submit" value="{btn_register_label}" type="submit" id="b_submit">{btn_register_label}</button>
+
+        </div>
+        <div class="botones">
+
+            <button id="cancelar" value="{btn_cancel_label}" type="button" onclick="javascript:window.location.href= 'doAction?action=login_init';">{btn_cancel_label}</button>
+        </div>
+
+
+
+
+</form>
+</div>
+
+<!-- END: main -->

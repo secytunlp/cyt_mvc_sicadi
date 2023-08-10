@@ -1,0 +1,167 @@
+<!-- BEGIN: main -->
+<style>
+#user_usergroups{
+
+}
+#user_usergroups fieldset {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-radius: 4px 4px 0 0;
+    box-shadow:none;
+    margin-top: 1em;
+    padding: 1.5em;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+#user_usergroups .tblFooters {
+    /*margin-top: -16px;*/
+    background: none;
+    border:none;
+    text-align: center;
+    margin-bottom: -34px;
+    margin-top: -16px;
+}
+#user_usergroups .camposRequeridos {
+    display: none;
+}
+#user_usergroups form fieldset .item {
+    padding: 1px;
+}
+</style>
+
+
+
+<script type="text/javascript">
+
+
+function before_submit_usergroup(){
+
+	wait("#tbody_usergroups");
+}
+
+function remove_usergroup( itemOid ){
+
+	before_submit_usergroup();
+	soft_load(false, "doAction?action=delete_user_usergroup_session&item_oid="+itemOid, "GET", null, show_usergroups, false);
+}
+
+function add_usergroup( data ){
+	show_usergroups( data );
+	$("#item_oid").val("");
+	$("#item_oid").blur();
+	//$("#item_oid").focus();
+}
+
+function show_usergroups( data ){
+	
+	var data = $.parseJSON(data);
+	if( data != null && data["error"]!=null){
+		showMessageError( data["error"], true );
+	}
+	
+	if( data != null && data["usergroups"]!=null){
+
+		var usergroups = data["usergroups"];
+		var usergroupColumns = data["usergroupColumns"];
+		var usergroupColumnsAlign = data["usergroupColumnsAlign"];
+		var usergroupColumnsLabels = data["usergroupColumnsLabels"];
+
+		$('#thead_usergroups').find('tr').remove();
+		$("#thead_usergroups").last().append( $('<tr>') );
+		var trHeadRegistro = $('#thead_usergroups').find('tr').last();
+		
+		for( var colIndex=0; colIndex < usergroupColumnsLabels.length;colIndex++){
+
+			var label = usergroupColumnsLabels[colIndex];
+			var align =  usergroupColumnsAlign[colIndex];
+			trHeadRegistro.append($('<th>')
+	                .text( label )
+	                .attr('style', 'text-align:' + align + ';')
+	            );
+			
+		}
+
+		$('#tbody_usergroups').find('tr').remove();
+				
+		for( var index=0; index< usergroups.length;index++){
+
+			var usergroup = usergroups[index];
+
+			$("#tbody_usergroups").last().append( $('<tr>') );
+			
+			var trRegistro = $('#tbody_usergroups').find('tr').last();
+			
+			for( var colIndex=0; colIndex < usergroupColumns.length;colIndex++){
+
+				var column = usergroupColumns[colIndex];
+				var align =  usergroupColumnsAlign[colIndex];
+				var valor = usergroup[column]; 
+
+				trRegistro.append($('<td>')
+		                .text( valor )
+		                .attr('style', 'text-align:' + align + ';')
+		            );
+				
+			}
+
+
+			trRegistro.append($('<td>')
+					.attr('style', 'text-align:center;')
+					.append($('<href>')
+							.append($('<img>')
+					                .attr('src', '{WEB_PATH}css/smile/images/chk_off.png')
+					                .text('quitar')
+					            )
+					        .attr('href', '#')
+					        .attr('style', 'cursor:pointer;')
+					        .attr('onclick', 'javascript: remove_usergroup( encodeURI( \"' + usergroup["item_oid"] +  '\"));' )
+			            )
+	            ); 
+
+		}
+		
+	}
+
+	wakeUp("#tbody_usergroups");
+	
+	/*$("#usergroup_oid").val("");		
+	$("#usergroup_oid").focus();*/
+	
+	
+}
+
+
+
+</script>
+<div id="user_usergroups">
+<fieldset>
+	<legend>{usergroups_title}</legend>
+<table id="usergroups">
+   	<thead id="thead_usergroups">
+   	<tr>
+   		<!-- BEGIN: usergroup_th -->
+   		<th style="text-align: {align};">{usergroup_label}</th>
+   		<!-- END: usergroup_th -->
+   		<th></th>
+   	</tr>
+   	</thead>
+   	<tbody id="tbody_usergroups">
+   	<!-- BEGIN: usergroup -->   	
+   	<tr>
+   		<!-- BEGIN: usergroup_data -->	
+   		<td style="text-align: {align};">{data}</td>
+   		<!-- END: usergroup_data -->
+   		
+   		<td style="text-align: center;">
+   			<!-- BEGIN:editar_usergroup -->
+   			<a href="#"><img src='{WEB_PATH}css/smile/images/chk_off.png' style="cursor:pointer;" onclick="javascript: remove_usergroup(encodeURI('{item_oid}'));"></a>
+   			<!-- END:editar_usergroup -->
+   		</td>
+   	</tr>
+   	<!-- END: usergroup -->
+   	</tbody>
+</table>
+<br />
+{formulario}
+</fieldset>
+    
+</div>
+<!-- END: main -->

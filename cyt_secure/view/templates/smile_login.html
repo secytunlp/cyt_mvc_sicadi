@@ -1,0 +1,129 @@
+<!-- BEGIN: main -->
+<script type="text/javascript">
+	cuilMask = function ( cuilid){
+
+		$(cuilid).inputmask('remove');
+		$(cuilid).inputmask({
+			mask: ["99-99999999-9"], placeholder: ""
+		});
+
+
+
+	}
+
+
+	function  cuilFormato( ){
+
+		cuilMask('#input_username');
+
+	}
+function dame_perfil( nu_documento ){
+
+	let numArray = nu_documento.value.split("-");
+	//console.log(numArray[1]);
+	$("#usergroup_oid").html("");
+	
+	jQuery.ajax({
+	      url:"doAction?action=login_dame_perfil&nu_documento=" + numArray[1],
+	      dataType:"json",
+	      success: function(data){
+	      	
+	      	if( data != null && data["error"]!=null){
+	      		showMessageError( data["error"], true );
+	      		//inhabilitar el submit.
+	      		$("#submit").hide();
+	      	}
+	      	
+	      	else{
+	      		
+	            $.each(data.perfil, function(i, item) {
+	                
+	                $("#usergroup_oid").append("<option value='"+item.cd+"'>"+item.ds+"</option>");
+	            });
+	      		
+	      		for ( var indice = 0; indice < data["perfil"].length; indice++) {
+	      			
+	      			
+	      		}
+	      		
+	      		$("#submit").show();
+	      	} 	
+	      	 
+	      }
+	});
+}
+</script>
+<style>
+
+body{
+ background: none;
+}
+
+.jfVal, .jValSpacercover {
+    display: none;
+}
+
+</style>
+<div class="sicadi">
+	<img src="{WEB_PATH}css/smile/images/sicadi.png" alt="SICADI" width="330" height="110">
+</div>
+<div class="containerLogin">
+
+<!-- BEGIN: msg_error -->
+<script type="text/javascript">
+showMessageError('{msg}', false);
+</script>	
+<!-- END: msg_error -->
+
+	<form id = "loginform" name = "loginform" action='{WEB_PATH}{login_action}'  onsubmit="return validate('loginform');" method='post'>
+
+		<div class="form-row">
+			<label class="labelLogin" for="{lbl_username}">{lbl_username}</label>
+			<input required type="text" size="24" value="" id="input_username" name="username" data-required="yes" data-required-msg="{txt_ingrese_username}" class="inputLogin input-text input-max-length" onFocus="javascript: cuilFormato();" onBlur="dame_perfil(this)"/>
+
+			<div class="obligatorioLogin">
+				<h3>*</h3>
+			</div>
+		</div>
+		<div class="form-row">
+			<label class="labelLogin" required for="{lbl_password}">{lbl_password}</label>
+			<input class="inputLogin" required type="password" name="password" id="password" value="{ds_password}" size="30" jVal="{valid:function (val) { return required(val,'{txt_ingrese_password}'); }}"/>
+			<div class="obligatorioLogin">
+				<h3>*</h3>
+			</div>
+		</div>
+		<div class="form-row">
+			<label class="labelLogin" for="usergroup_oid">{lbl_usergroup}</label>
+
+
+			<select class="inputLogin" required id="usergroup_oid"  name="usergroup.oid"/>
+			<option value="">--Seleccionar--</option>
+			</select>
+			<div class="obligatorioLogin">
+				<h3>*</h3>
+			</div>
+		</div>
+		<div class="campos-requeridos">
+			<h3>(*) CAMPOS REQUERIDOS </h3>
+		</div>
+		<div class="flex">
+			<div class="form-leftLogin">
+				<h4><a href="#" class="a_sin_formato" onclick="javascript: linkTo('{solicitar_clave_init_action}'); return false;">{txt_recurepar_password}</a></h4>
+				<h4><a href='doAction?action=signup_init' class="a_sin_formato">NUEVO USUARIO </a></h4>
+
+
+			</div>
+			<div class="form-rightLogin">
+
+				<button value="{btn_ingresar}" type="submit" id="ingresar">{btn_ingresar}</button>
+			</div>
+		</div>
+	</form>
+
+
+
+</div>
+
+
+
+<!-- END: main -->
