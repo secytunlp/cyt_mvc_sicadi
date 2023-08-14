@@ -8,7 +8,7 @@
  */
 class SolicitudEstadoGridModel extends GridModel {
 
-	public function SolicitudEstadoGridModel() {
+	public function __construct() {
 
 		parent::__construct();
 		$this->initModel();

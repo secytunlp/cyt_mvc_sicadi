@@ -30,7 +30,7 @@ define( 'CYT_SECURE_TEMPLATE_LOGIN',  CYT_SECURE_PATH . 'view/templates/smile_lo
 define( 'CDT_SECURE_TEMPLATE_MAIL_FORGOT_PASSWORD',  CYT_SECURE_PATH . 'view/templates/forgot_password/mail_forgot_password.html' );
 
 
-define( 'CYT_UI_SMILE_TEMPLATE_FOOTER',  CYT_SECURE_PATH . 'view/templates/footer.html', true );
+define( 'CYT_UI_SMILE_TEMPLATE_FOOTER',  CYT_SECURE_PATH . 'view/templates/footer.html');
 
 /*rendiciones*/
 define( 'CYT_TEMPLATE_RENDICION_FORM',  CYT_SECURE_PATH . 'view/templates/rendiciones/form_columns.htm' );

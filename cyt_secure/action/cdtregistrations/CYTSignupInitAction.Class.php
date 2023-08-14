@@ -85,7 +85,7 @@ class CYTSignupInitAction extends CdtOutputAction{
 		
 		$xtpl->assign ( 'invalid_email', CDT_SECURE_MSG_EMAIL_INVALID );
 		$xtpl->assign ( 'ingrese_password', CDT_SECURE_MSG_PASSWORD_REQUIRED );
-		$xtpl->assign ( 'passwords_incorrectas', CDT_SECURE_MSG_PASSWORDS_INCORRECTAS );
+		$xtpl->assign ( 'passwords_incorrectas', CDT_SECURE_MSG_PASSWORDS_INVALID );
 		$xtpl->assign ( 'cambiar_imagen', CDT_SECURE_MSG_RELOAD_IMAGE );
 		
 		$xtpl->assign ( 'btn_register_label', CDT_SECURE_LBL_BTN_REGISTER );
@@ -129,8 +129,8 @@ class CYTSignupInitAction extends CdtOutputAction{
 		
 		
 		
-		$xtpl->assign ( 'registrarse_titulo', CDT_SECURE_REGISTRARSE_TITULO );
-		$xtpl->assign ( 'registrarse_subtitulo', CDT_SECURE_REGISTRARSE_SUBTITULO );
+		/*$xtpl->assign ( 'registrarse_titulo', CDT_SECURE_REGISTRARSE_TITULO );
+		$xtpl->assign ( 'registrarse_subtitulo', CDT_SECURE_REGISTRARSE_SUBTITULO );*/
 		
 		$xtpl->assign ( 'titulo', $this->getOutputTitle() );
 		

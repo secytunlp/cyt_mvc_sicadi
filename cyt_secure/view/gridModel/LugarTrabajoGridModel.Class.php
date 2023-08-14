@@ -8,7 +8,7 @@
  */
 class LugarTrabajoGridModel extends GridModel {
 
-	public function LugarTrabajoGridModel() {
+	public function __construct() {
 
 		parent::__construct();
 		$this->initModel();

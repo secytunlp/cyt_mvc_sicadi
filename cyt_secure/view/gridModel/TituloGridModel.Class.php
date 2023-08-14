@@ -8,7 +8,7 @@
  */
 class TituloGridModel extends GridModel {
 
-	public function TituloGridModel() {
+	public function __construct() {
 
 		parent::__construct();
 		$this->initModel();
