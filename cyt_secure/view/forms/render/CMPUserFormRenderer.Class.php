@@ -10,7 +10,7 @@
 class CMPUserFormRenderer extends DefaultFormRenderer {
 
 	 protected function getXTemplate() {
-    	return new XTemplate( CDT_CMP_TEMPLATE_FORM );
+    	return new XTemplate( CYT_TEMPLATE_USER_EDIT );
     }
 	
 	
@@ -30,9 +30,9 @@ class CMPUserFormRenderer extends DefaultFormRenderer {
 			
 			
 			foreach ($fieldset->getFieldsColumns() as $column => $fields) {
-				
+				$i=1;
 				foreach ($fields as $formField) {
-					
+
 					$input = $formField->getInput();
 					$label = $formField->getLabel();
 					
@@ -45,12 +45,24 @@ class CMPUserFormRenderer extends DefaultFormRenderer {
 						
 					}
 					else $xtpl->assign("display", 'none');
-					
-					$xtpl->parse("main.fieldset.column.field");
+
+                    if (($i % 2) == 0) {
+                        $xtpl->assign("align", 'left');
+                        $xtpl->parse("main.fieldset.column.field");
+                        $xtpl->parse("main.fieldset.column");
+                    }
+
+                    else {
+                        $xtpl->assign("align", 'right');
+                        $xtpl->parse("main.fieldset.column.field");
+                    }
+                    $i++;
+
+
 				}
-				$xtpl->parse("main.fieldset.column");
+
 			}
-			
+            $xtpl->parse("main.fieldset.column");
 			
 			$xtpl->parse("main.fieldset");
 		}

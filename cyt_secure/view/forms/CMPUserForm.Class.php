@@ -20,7 +20,7 @@ class CMPUserForm extends CMPForm{
 		parent::__construct($id);
 
 		$fieldset = new FormFieldset( "" );
-		$fieldset->addField( FieldBuilder::buildFieldReadOnly ( CDT_ENTITIES_LBL_ENTITY_OID, "oid", ""  ) );
+		$fieldset->addField( FieldBuilder::buildFieldDisabled ( CDT_ENTITIES_LBL_ENTITY_OID, "oid", ""  ) );
 		
 		
 		$fieldCUIL = FieldBuilder::buildFieldText ( CDT_SECURE_LBL_CDTUSER_DS_USERNAME, "ds_username", CDT_SECURE_MSG_USERNAME_REQUIRED  );

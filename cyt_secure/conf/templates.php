@@ -8,8 +8,10 @@
  * @since 
  * 
  */
+
 define('CDT_SECURE_TEMPLATE_CDTUSERPROFILE_EDIT', CYT_SECURE_PATH . 'view/templates/cdtusers/edit_cdtuserprofile.html');
 
+define('CYT_TEMPLATE_USER_EDIT', CYT_SECURE_PATH . 'view/templates/cdtusers/form_columns.html');
 define('CYT_TEMPLATE_USER_EDIT_USER_RELACIONES', CYT_SECURE_PATH . 'view/templates/cdtusers/user_relaciones_forms.html');
 define('CYT_TEMPLATE_USER_EDIT_USERGROUPS', CYT_SECURE_PATH . 'view/templates/cdtusers/edit_usergroups.html');
 define('CYT_TEMPLATE_USER_EDIT_IPS', CYT_SECURE_PATH . 'view/templates/cdtusers/edit_ips.html');
