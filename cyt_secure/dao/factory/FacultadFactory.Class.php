@@ -14,7 +14,7 @@ class FacultadFactory extends CdtGenericFactory {
         $facultad = parent::build($next);
         if(array_key_exists('cd_facultad',$next)){
         	$alias = $this->getAlias();
-        	$facultad->setOid( ($alias=='FacultadPlanilla_')?$next["cd_facultadplanilla"]:$next["cd_facultad"] );
+        	$facultad->setOid( ($alias=='FacultadPlanilla_')?(isset($next["cd_facultadplanilla"]))?$next["cd_facultadplanilla"]:'':$next["cd_facultad"] );
         }
 
         $factory = new CatFactory();

@@ -194,6 +194,18 @@
                 </div>
             </div>
             <div class="form-left">
+				<label for="{lbl_name}">{lbl_name}</label>
+
+                <input required type='text'  class="inputSignup" name='ds_name' id='ds_name' value='{ds_name}'/>
+                <div class="obligatorio">
+                    <h3>*</h3>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="form-flex">
+            <div class="form-right">
                 <label for="{lbl_password}">{lbl_password}</label>
 
                 <input required onkeyup="showPswSecurityLevel(this.value);" type='password' class="inputSignup" name='ds_password' id='ds_password' size='20' jVal="{valid:function (val) { return required(val,'{ingrese_password}'); }}"/>
@@ -204,17 +216,6 @@
 	                    </span>
 	                    <div id="psw_level"></div>
                     </span>
-                <div class="obligatorio">
-                    <h3>*</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-flex">
-            <div class="form-right">
-                <label for="{lbl_name}">{lbl_name}</label>
-
-                <input required type='text'  class="inputSignup" name='ds_name' id='ds_name' value='{ds_name}'/>
                 <div class="obligatorio">
                     <h3>*</h3>
                 </div>
@@ -256,10 +257,13 @@
         <div class="campos-requeridos">
             <h4> (*) CAMPOS REQUERIDOS </h4>
         </div>
+		<!-- Campo de "Soy humano" (reCAPTCHA) -->
+    <div class="g-recaptcha" data-sitekey="6Lf5aT0oAAAAAIS7RdHzR6vAEAtQWGMvd9VJskbS"></div>
+    
+    <!-- Campo oculto para almacenar la respuesta del reCAPTCHA -->
+    <input type="hidden" name="recaptcha_response">
         <div class="botones">
-            <img id="siimage" align="center" style="padding-right: 5px; border: 0" src="{WEB_PATH}/libs/captcha/securimage_show.php?sid={sid_captcha}" />
-            <a tabindex="-1" style="border-style: none" href="#" title="{change_image}" onClick="document.getElementById('siimage').src = '{WEB_PATH}/libs/captcha/securimage_show.php?sid=' + Math.random(); return false"><img src="{WEB_PATH}libs/captcha/refresh.gif" title="{change_image}" alt="{change_image}" border="0" onClick="this.blur()" align="bottom" /></a>
-            <input required type='input' name='captcha' id='captcha'/>
+            
 
             <button style="" class="submit" value="{btn_register_label}" type="submit" id="b_submit">{btn_register_label}</button>
 
@@ -274,5 +278,6 @@
 
 </form>
 </div>
-
+<!-- Script para cargar el widget de reCAPTCHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <!-- END: main -->

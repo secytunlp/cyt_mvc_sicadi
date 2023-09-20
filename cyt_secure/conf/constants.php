@@ -2,7 +2,9 @@
 
 ini_set('memory_limit', '-1');
 ini_set('max_execution_time', '0');
-ini_set('display_errors', '0');
+define("CDT_ERROR_HANDLER", 1);
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
 
 
 define('CDT_UI_LANGUAGE', 'es');
@@ -25,9 +27,9 @@ define('CYT_MONEDA_POSICION_IZQ', 1);
 
 
 
-define('CYT_DATE_FORMAT', 'd/m/Y');
+/*define('CYT_DATE_FORMAT', 'd/m/Y');
 define('CYT_DATETIME_FORMAT', 'd/m/y H:i:s');
-define('CYT_DATETIME_FORMAT_STRING', 'YmdHis');
+define('CYT_DATETIME_FORMAT_STRING', 'YmdHis');*/
 
 define('CYT_TIPO_ACREDITACION_ID', 1);
 define('CYT_TIPO_ACREDITACION_PPID', 2);
@@ -96,7 +98,7 @@ define('CYT_CATEGORIA_NO_FORMADOS', '9,10');
 
 define('CYT_FACULTAD_NO_DECLARADA', 574);
 
-define('CYT_DIA_MES_BECA', '-03-31');
+//define('CYT_DIA_MES_BECA', '-03-31');
 
 define('CYT_DIA_MES_PROYECTO_INI', '-01-01');
 define('CYT_DIA_MES_PROYECTO_FIN', '-12-31');
@@ -128,11 +130,7 @@ define('CYT_CD_PRESUPUESTO_TIPO_5', 5);
 
 define('CYT_DEDICACIONES_SIMPLES', '3,5');
 
-define('CYT_CD_VIATICO', 'Viaticos');
-define('CYT_DS_VIATICO', 'Viáticos');
-define('CYT_DS_PASAJE', 'Pasajes');
-define('CYT_CD_INSCRIPCION', 'Inscripcion');
-define('CYT_DS_INSCRIPCION', 'Inscripción');
+
 
 define('CYT_CD_CARGO_NO_DECLARADO', 6);
 

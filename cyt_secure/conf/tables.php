@@ -16,7 +16,7 @@ define('CYT_TABLE_DEDDOC', 'deddoc');
 define('CYT_TABLE_LUGAR_TRABAJO', 'unidad');
 define('CYT_TABLE_PERIODO', 'periodo');
 define('CYT_TABLE_CAT', 'cat');
-define('CYT_TABLE_ESTADO', 'estado');
+//define('CYT_TABLE_ESTADO', 'estado');
 define('CYT_TABLE_PREDEFINIDO_EVALUACION', '`predefinidoevaluacion`');
 define('CYT_TABLE_ESTADO_EVALUACION', 'estadoevaluacion');
 define('CYT_TABLE_TIPO_INVESTIGADOR', 'tipoinvestigador');
@@ -39,6 +39,6 @@ define('CYT_TABLE_CDTUSERGROUP', 'cdt_usergroup');
 define('CYT_TABLE_USER_USERGROUP', 'cyt_user_usergroup');
 define('CYT_TABLE_USER_FACULTAD', 'cyt_user_facultad');
 
-define( 'CDT_SECURE_TABLE_CDTREGISTRATION', 'cyt_registration', true);
+define( 'CDT_SECURE_TABLE_CDTREGISTRATION', 'cyt_registration');
 
 ?>

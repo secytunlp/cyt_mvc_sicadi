@@ -15,6 +15,7 @@ class Proyecto extends Entity{
 		private $ds_titulo;
 		private $ds_codigo;
 		private $dt_ini;
+		private $dt_inc;
 		private $dt_fin;
 		
 		private $facultad;

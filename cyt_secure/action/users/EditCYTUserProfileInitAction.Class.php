@@ -26,10 +26,10 @@ class EditCYTUserProfileInitAction extends CdtEditInitAction{
 	protected function getEntity(){
 
 		$oUser = null;
-
+//print_r($_GET);
 		//recuperamos el usuario logueado.
 		$cd_User = CdtUtils::getParamPOST('cd_user');
-			
+			CYTSecureUtils::logObject($_SESSION);
 		if (empty( $cd_User )) {
 
 			$oUser = CYTSecureUtils::getUserLogged();

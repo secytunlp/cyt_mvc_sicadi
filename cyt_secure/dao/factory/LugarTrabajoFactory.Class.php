@@ -32,9 +32,15 @@ class LugarTrabajoFactory extends CdtGenericFactory {
         
 
 	$lugarTrabajoPadre = new LugarTrabajo();
-	$lugarTrabajoPadre->setDs_unidad( $next["PADRE_ds_unidad"] );
-	$lugarTrabajoPadre->setOid( $next["PADRE_cd_unidad"] );
-	$lugarTrabajoPadre->setDs_sigla( $next["PADRE_ds_sigla"] );
+	if (isset($next['PADRE_ds_unidad'])) {
+		$lugarTrabajoPadre->setDs_unidad( $next["PADRE_ds_unidad"] );
+	}
+	if (isset($next['PADRE_cd_unidad'])) {
+		$lugarTrabajoPadre->setOid( $next["PADRE_cd_unidad"] );
+	}
+	if (isset($next['PADRE_ds_sigla'])) {
+		$lugarTrabajoPadre->setDs_sigla( $next["PADRE_ds_sigla"] );
+	}
 
         $lugarTrabajo->setPadre( $lugarTrabajoPadre );
 	

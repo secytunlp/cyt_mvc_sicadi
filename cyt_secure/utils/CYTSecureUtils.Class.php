@@ -31,7 +31,7 @@ class CYTSecureUtils {
 		//dejamos en sessi�n las funciones que puede realizar el usuario (permisos).
 		$_SESSION [APP_NAME]["functions"] = serialize( $oUser->getFunctions() ) ;
 		
-		
+		//CYTSecureUtils::logObject($_SESSION);
 	}	
 
 	/**
@@ -437,11 +437,13 @@ class CYTSecureUtils {
 		$oUser = new User();
 		
 		$data = CdtUtils::getParamSESSION(APP_NAME);
-		$oUser->setOid( $data["cd_user"]);
-		$oUser->setFunctions( unserialize( $data["functions"]) );
-		$oUser->setDs_username( $data["ds_username"] );
-		$oUser->setDs_name( $data["ds_name"] );
-		$oUser->getUserGroup()->setCd_usergroup( $data["cd_usergroup"]);
+		 if (is_array($data)) {
+			$oUser->setOid( $data["cd_user"]);
+			$oUser->setFunctions( unserialize( $data["functions"]) );
+			$oUser->setDs_username( $data["ds_username"] );
+			$oUser->setDs_name( $data["ds_name"] );
+			$oUser->getUserGroup()->setCd_usergroup( $data["cd_usergroup"]);
+		 }
 		return $oUser;
 	}
 	

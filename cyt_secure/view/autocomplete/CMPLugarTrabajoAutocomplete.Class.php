@@ -37,10 +37,11 @@ class CMPLugarTrabajoAutocomplete extends CMPEntityAutocomplete{
 		
 		$criterio = new CdtSearchCriteria();
 
+        //$criterio->addFilter("bl_activa", 1, "=" );
 		$tLugarTrabajo = CYTSecureDAOFactory::getLugarTrabajoDAO()->getTableName();
 		
 		
-		$filter = new CdtSimpleExpression( "($tLugarTrabajo.ds_unidad like '%$text%') OR ($tLugarTrabajo.ds_sigla like '%$text%')");
+		$filter = new CdtSimpleExpression( "(($tLugarTrabajo.ds_unidad like '%$text%') OR ($tLugarTrabajo.ds_sigla like '%$text%')) AND $tLugarTrabajo.bl_activa = 1");
 
 		$criterio->setExpresion($filter);
 

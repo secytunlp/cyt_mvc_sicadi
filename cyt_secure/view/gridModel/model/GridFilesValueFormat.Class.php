@@ -27,7 +27,7 @@ class GridFilesValueFormat extends GridValueFormat {
 		     $handle=opendir($dir);
 				while ($archivo = readdir($handle))
 				{
-			        if ((is_file($dir.$archivo))&&(!strchr($archivo,CYT_MSG_SOLICITUD_ARCHIVO_NOMBRE)&&(!strchr($archivo,CYT_MSG_EVALUACION_ARCHIVO_NOMBRE))))
+			        if ((is_file($dir.$archivo))&&(!strchr($archivo,CYT_MSG_SOLICITUD_ARCHIVO_NOMBRE)&&(!strchr($archivo,CYT_MSG_EVALUACION_ARCHIVO_NOMBRE))&&(!strchr($archivo,CYT_LBL_SOLICITUD_FOTO_SIGLA))))
 			         {
 			         	$adjuntos .='<a href="'.$dirREL.$archivo.'" target="_blank"><img class="hrefImg" src="'.WEB_PATH.'css/images/file.jpg" title="'.$archivo.'" /></a>';
 			         	

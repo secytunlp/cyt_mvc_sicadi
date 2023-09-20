@@ -65,7 +65,7 @@ class CYTSecureComponentsFactory {
 		$autocomplete = new CMPTituloAutocomplete();
 
 		$autocomplete->setFunctionCallback( $fCallback );
-		$autocomplete->setInputSize( $inputSize );
+		//$autocomplete->setInputSize( $inputSize );
 		$autocomplete->setInputName( $inputName );
 		$autocomplete->setInputId(  $inputId );
 			
@@ -98,7 +98,7 @@ class CYTSecureComponentsFactory {
 		$autocomplete = new CMPTituloPosgradoAutocomplete();
 
 		$autocomplete->setFunctionCallback( $fCallback );
-		$autocomplete->setInputSize( $inputSize );
+		//$autocomplete->setInputSize( $inputSize );
 		$autocomplete->setInputName( $inputName );
 		$autocomplete->setInputId(  $inputId );
 			
@@ -160,7 +160,7 @@ class CYTSecureComponentsFactory {
 		$autocomplete = new CMPSolicitudAutocomplete();
 
 		$autocomplete->setFunctionCallback( $fCallback );
-		$autocomplete->setInputSize( $inputSize );
+		//$autocomplete->setInputSize( $inputSize );
 		$autocomplete->setInputName( $inputName );
 		$autocomplete->setInputId(  $inputId );
 			

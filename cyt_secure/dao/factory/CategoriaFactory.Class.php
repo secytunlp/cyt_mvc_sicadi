@@ -14,7 +14,8 @@ class CategoriaFactory extends CdtGenericFactory {
         $categoria = parent::build($next);
         if(array_key_exists('cd_categoria',$next)){
         	$alias = $this->getAlias();
-			CdtUtils::log('alias: '.$alias);
+
+							
 			switch ($alias) {
         		case 'Categoriasolicitada_':
             		$categoria->setOid( $next["cd_categoriasolicitada"] );

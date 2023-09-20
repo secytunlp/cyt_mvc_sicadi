@@ -24,8 +24,9 @@ class LugarTrabajo  extends Entity{
 	
 	private $ds_direccion;	
 	private $ds_mail;	
-	private $ds_telefono;	
-    
+	private $ds_telefono;
+    private $bl_activa;
+
 
     public function __construct(){
     	
@@ -93,6 +94,11 @@ class LugarTrabajo  extends Entity{
 		return $this->getDs_unidad().$sigla;
 	}
 
+    public function getDs_completo(){
+        $sigla = $this->getDs_sigla()?" (".$this->getDs_sigla().")":"";
+        return $this->getDs_unidad().$sigla;
+    }
+
 	public function getDs_codigo()
 	{
 	    return $this->ds_codigo;
@@ -132,5 +138,15 @@ class LugarTrabajo  extends Entity{
 	{
 	    $this->ds_telefono = $ds_telefono;
 	}
+
+    public function getBl_activa()
+    {
+        return $this->bl_activa;
+    }
+
+    public function setBl_activa($bl_activa)
+    {
+        $this->bl_activa = $bl_activa;
+    }
 }
 ?>

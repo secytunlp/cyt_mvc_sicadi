@@ -17,7 +17,7 @@ class AddRegistroChequearAction extends CdtAction{
 	public function execute(){
 
 		
-		$result = "";
+		$result = array();
 		
 		try{
 			

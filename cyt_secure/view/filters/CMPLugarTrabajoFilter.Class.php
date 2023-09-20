@@ -56,6 +56,8 @@ class CMPLugarTrabajoFilter extends CMPFilter{
 		
 		$ds_unidad = $this->getDs_unidad();
 
+        $criteria->addFilter("bl_activa", 1, "=" );
+
 		if(!empty($ds_unidad)){
 			$criteria->addFilter("ds_unidad", $ds_unidad, "like", new CdtCriteriaFormatLikeValue() );
 		}

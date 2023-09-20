@@ -13,34 +13,60 @@ class UserManager extends EntityManager{
 	}
 
 	public function signup( User $oUser ){
-		CYTSecureUtils::logObject( $oUser);
+		//CYTSecureUtils::logObject( $oUser);
 		//chequeamos el captcha.
 		//TODO ver cómo mejorarlo.
 		
-		include("libs/captcha/securimage.php");
+		/*include("libs/captcha/securimage.php");
 		$img = new Securimage();
 		$valid = $img->check(CdtUtils::getParamPOST('captcha'));
 		if(!$valid)
+			throw new CaptchaException();*/
+
+		//print_r($_POST);
+		$recaptchaSecretKey = '6Lf5aT0oAAAAAEXJXiM0ks2c0VeS42YsSJtvZhUN'; // Reemplaza con tu clave secreta
+
+		$recaptchaResponse = $_POST['g-recaptcha-response'];
+
+		$url = 'https://www.google.com/recaptcha/api/siteverify';
+		$data = [
+			'secret'   => $recaptchaSecretKey,
+			'response' => $recaptchaResponse,
+		];
+
+		$options = [
+			'http' => [
+				'method' => 'POST',
+				'content' => http_build_query($data),
+			],
+		];
+
+		$context  = stream_context_create($options);
+		$result = file_get_contents($url, false, $context);
+		$responseKeys = json_decode($result, true);
+
+		if ($responseKeys["success"]) {
+			// El usuario es humano, puedes procesar el formulario.
+			CdtUtils::log_debug( "signup 1 ");
+		
+			//creamos la registración
+			$oRegistration = new CYTRegistration();
+			
+			$oRegistration->setDs_username( $oUser->getDs_username() );
+			$oRegistration->setDs_name( $oUser->getDs_name() );
+			$oRegistration->setDs_password( md5($oUser->getDs_password()) ); 
+			$oRegistration->setDs_email( $oUser->getDs_email() );
+			$oRegistration->setFacultad( $oUser->getFacultad() );
+			
+			CdtUtils::log_debug( "signup 2 ");
+			
+			$oManager = CYTSecureManagerFactory::getRegistrationManager();
+			$oManager->add( $oRegistration );
+		} else {
 			throw new CaptchaException();
+		}
 
-
-
-
-		CdtUtils::log_debug( "signup 1 ");
 		
-		//creamos la registración
-		$oRegistration = new CYTRegistration();
-		
-		$oRegistration->setDs_username( $oUser->getDs_username() );
-		$oRegistration->setDs_name( $oUser->getDs_name() );
-		$oRegistration->setDs_password( md5($oUser->getDs_password()) ); 
-		$oRegistration->setDs_email( $oUser->getDs_email() );
-		$oRegistration->setFacultad( $oUser->getFacultad() );
-		
-		CdtUtils::log_debug( "signup 2 ");
-		
-		$oManager = CYTSecureManagerFactory::getRegistrationManager();
-		$oManager->add( $oRegistration );
 		
 				
 	}	
@@ -97,7 +123,7 @@ class UserManager extends EntityManager{
     }	
     
 	private function buildNewUserEmail( User $oUser, $newPassword, XTemplate $xtpl ){
-        $xtpl->assign ( 'img_logo', WEB_PATH.'css/images/image002.gif' );
+        $xtpl->assign ( 'img_logo', WEB_PATH.'css/smile/images/sicadi_little.png' );
 		$xtpl->assign('CDT_MVC_APP_SUBTITLE', htmlspecialchars(CDT_MVC_APP_SUBTITLE));
 		$xtpl->assign('WEB_PATH', WEB_PATH);
         $xtpl->assign('ds_name', htmlspecialchars($oUser->getDs_name()));
